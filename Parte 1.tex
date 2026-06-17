@@ -1,2 +1,138 @@
-\section{Cuadripolos}
-Utilizando el generador de señales y el osciloscopio se relizaron 
+\section{Medición de parámetros del transformador}
+\subsubsection{Inductancia}
+En primer lugar, se calculó la inductancia de los devanados del transformador utilizando la función de autobode del osciloscopio y tomando en cuenta el siguiente esquemático:
+
+\begin{figure}[H]
+    \label{fig:inductancia}
+    \centering
+    \begin{tikzpicture}[scale=1.5, transform shape]
+        % Paths, nodes and wires:
+        \node[transformer, cute] at (9.55, 6.8){};
+        \node[oscillator](N1) at (5.98, 6.75){} node[anchor=east] at (N1.west){$V_s$};
+        \draw (8.5, 7.85) to[american resistor, l_={$R$}] (5.5, 7.856);
+        \draw (5.5, 7.856) -| (5.5, 7.25);
+        \draw (8.5, 5.75) -- (5.5, 5.75) |- (5.49, 6.26);
+        \draw[-latex] (8.5, 6) -- (8.5, 7.5);
+        \draw[-latex] (10.5, 6) -- (10.5, 7.5);
+        \node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (8.125, 6.75){} node[anchor=center] at (N2.text){$V_1$} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.75, 7){};
+        \node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N3) at (11.125, 6.75){} node[anchor=center] at (N3.text){$V_2$} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.75, 7){};
+    \end{tikzpicture}
+    \caption{Esquema utilizado para medir la inductancia de los devanados}
+\end{figure}
+
+Siendo $R = 1k\Omega$. Para determinar la inductancia se ha realizado el diagrama de Bode tomando la señal de entrada como $V_s$ y la señal de salida $V_1$. Para este caso hemos tomado como devanado principal la que tiene indicada 33 espiras y como devanado secundario la que tiene 50 espiras. 
+
+Se repitió la medición con el segundo devanado, el que está indicado con la tensión $V_2$. 
+
+A su vez se han medido las inductancias haciendo uso del analizador de indcutancias. Los resultados de ambas medidas se pueden ver en la Tabla \ref{Tab:tabla_ind}.
+
+\begin{table}[H]
+    \centering
+    \label{tab:tabla_ind}
+    
+    \begin{tabular}{|c|c|c|}
+        \hline
+       Devanado & Inductancia calculada[mH] &Inductancia Medida[mH] \\ 
+        \hline
+        1 & 1,28  & 1,4 \\
+        \hline
+        2 & 4,36 & 5\\
+        \hline
+    \end{tabular}
+    
+    \caption{Inductancias de ambos bobinados}
+\end{table}
+
+\subsubsection{Factor de acoplamiento}
+
+En segundo lugar para poder estimar el factor de acoplamiento del transformador experimentalmente se utilizo la Ecuacion PONER REF \ref{}. La fuente, indicado con $V_s$, genera una senoidal de amplitud $1,5Vp$ con frecuencia $f=10kHz$. Se ha medido la tensión sobre la entrada, $V_1$, y sobre la salida, $V_2$, y teniendo en cuenta la inductancia hallada en el punto anterior fue posible aproximar el factor de acoplamiento $k$. Este parametro lo calculamos con dos experimentos diferentes, variando la posicion de las bobinas.
+
+Para el primer circuito que se puede ver en el esquematico de la Figura \ref{medidion_k_L1}. Se obtuvieron las mediciones que se pueden ver en la Tabla \ref{tab:k_1}.
+
+\begin{figure}[H]
+    \centering
+    \label{medidion_k_L1}
+    \begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[oscillator] at (1.99, 5.24){};
+	\draw (1.5, 7.27) -- (1.5, 5.75) -| (1.5, 5.77) -| (1.5, 5.75) -| (1.5, 5.77);
+	\draw (1.5, 4.75) -| (1.5, 3);
+	\node[ground] at (1.5, 3.407){};
+	\draw (1.5, 3.407) |- (4.907, 3.407);
+	\node[transformer core, cute, xscale=1.83, yscale=1.83] at (6.828, 5.328){};
+	\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm](N1) at (5.407, 5.25){} node[anchor=center] at (N1.text){$L_1$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (8.407, 5.25){} node[anchor=center] at (N2.text){$L_2$};
+	\node[shape=rectangle, minimum width=0.965cm, minimum height=0.465cm](N3) at (2.49, 5.24){} node[anchor=center] at (N3.text){$V_s$};
+	\draw (4.907, 7.25) -- (1.5, 7.25);
+	\draw[-latex] (9.25, 3.5) -- (9.25, 7);
+	\draw[-latex] (4.5, 3.75) -- (4.5, 6.75);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N4) at (4.125, 5.25){} node[anchor=center] at (N4.text){$V_1$};
+	\node[shape=rectangle, minimum width=-0.035cm, minimum height=-0.035cm](N5) at (9.75, 5.25){} node[anchor=center] at (N5.text){$V_2$};
+\end{tikzpicture}
+    \caption{Circuito para la medición de $K$ utilizando $L_1$ como bobina de entrada}
+\end{figure}
+
+
+\begin{table}[H]
+    \centering
+    \label{tab:k_1}
+    
+    \begin{tabular}{|c|c|c|}
+        \hline
+            $V_1$[Vpp] & $V_2$[Vpp] & factor de acoplamiento (k) \\ 
+        \hline
+        3,3 & 3,26 & 0,5353\\
+        \hline
+    \end{tabular}
+    
+    \caption{Medición de k sobre el primer devanado}
+\end{table}
+
+Luego como se puede ver en el esquematico de la Figura \ref{}, se tomaron las mismas medidas pero dando vuelta el transformador para que $L_2$ sea la bobina de entrada. Los valores obtenidos se pueden ver en la Tabla \ref{tab:k_2}. 
+\begin{figure}[H]
+    \centering
+    \label{medidion_k_L2}
+    \begin{tikzpicture}[transform shape]
+	% Paths, nodes and wires:
+	\node[oscillator] at (1.99, 5.24){};
+	\draw (1.5, 7.27) -- (1.5, 5.75) -| (1.5, 5.77) -| (1.5, 5.75) -| (1.5, 5.77);
+	\draw (1.5, 4.75) -| (1.5, 3);
+	\node[ground] at (1.5, 3.407){};
+	\draw (1.5, 3.407) |- (4.907, 3.407);
+	\node[transformer core, cute, xscale=1.83, yscale=1.83] at (6.828, 5.328){};
+	\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm](N1) at (5.407, 5.25){} node[anchor=center] at (N1.text){$L_2$};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N2) at (8.407, 5.25){} node[anchor=center] at (N2.text){$L_1$};
+	\node[shape=rectangle, minimum width=0.965cm, minimum height=0.465cm](N3) at (2.49, 5.24){} node[anchor=center] at (N3.text){$V_s$};
+	\draw (4.907, 7.25) -- (1.5, 7.25);
+	\draw[-latex] (9.25, 3.5) -- (9.25, 7);
+	\draw[-latex] (4.5, 3.75) -- (4.5, 6.75);
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.465cm](N4) at (4.125, 5.25){} node[anchor=center] at (N4.text){$V_1$};
+	\node[shape=rectangle, minimum width=-0.035cm, minimum height=-0.035cm](N5) at (9.75, 5.25){} node[anchor=center] at (N5.text){$V_2$};
+\end{tikzpicture}
+    \caption{Circuito para la medición de $K$ utilizando $L_2$ como bobina de entrada}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    
+    \begin{tabular}{|c|c|c|}
+        \hline
+            $V_1$[Vpp] & $V_2$[Vpp] & factor de acoplamiento (k) \\ 
+        \hline
+        3,5 & 2,6 & 0,4025\\
+        \hline
+    \end{tabular}
+    
+   \caption{Medición de k sobre el segundo devanado}
+   \label{tab:k_2}
+\end{table}
+
+En este caso la estimación ideal del factor de acoplamiento para este transformador es ACA DEBERIA PONER ESTA EC EN INTRO Y REF $k = \sqrt{\frac{L_1}{L_2}}$. Dando así $k \sim 0,54$. 
+
+\subsection{Conclusiones}
+
+Los resultados de las mediciones de inductancia mostraron que el devanado $L_2$, correspondiente al bobinado de $50$ espiras, posee una inductancia mayor que el devanado $L_1$, de $33$ espiras. Este resultado es coherente con la dependencia aproximada de la inductancia con el cuadrado del número de espiras. Las inductancias calculadas a partir de los diagramas de Bode presentaron diferencias del $8,6\,\%$ y del $12,8\,\%$ respecto de las mediciones realizadas con el analizador de impedancias. Estas diferencias pueden atribuirse al mal funcionamiento del analizador de impedancias y a errores de medición de frecuencia. 
+
+Debido a que $L_2>L_1$ y a que el devanado $L_2$ posee una mayor cantidad de espiras, la conexión con $L_1$ como devanado de entrada y $L_2$ como devanado de salida corresponde a la configuración elevadora de tensión. De manera inversa, al utilizar $L_2$ como entrada y $L_1$ como salida, el transformador se encuentra en configuración reductora. Sin embargo, en la primera configuración se midió una tensión de salida ligeramente menor que la tensión de entrada, a pesar de que se esperaba un aumento de tensión. Esto evidencia que el comportamiento del transformador real se aparta considerablemente del modelo ideal. Entre las causas posibles se encuentran el flujo de dispersión, las pérdidas por efecto Joule en los devanados, las pérdidas por histéresis y corrientes parásitas en el núcleo, y las impedancias internas de los instrumentos utilizados. A partir de la medición realizada excitando el devanado $L_1$, se obtuvo un factor de acoplamiento aproximado de \[ k\approx0,54. \] Este valor indica que el acoplamiento magnético entre ambos devanados es moderado y que una fracción significativa del flujo generado por el devanado de entrada no enlaza al devanado secundario.
+
+CONCLUIR SOBRE EL VALOR DE K CON AMBOS EXP
