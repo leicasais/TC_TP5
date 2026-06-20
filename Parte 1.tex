@@ -141,7 +141,7 @@ Los valores obtenidos para las matrices de impedancias se expresan en $\Omega$.
 \mathbf{Z}_{9610} =
 \begin{pmatrix}
 326.96 \angle -29.04^\circ & 164.85 \angle -63.24^\circ \\
-183,97 \angle -52.04^\circ & 230.08 \angle -40.24^\circ
+183.97 \angle -52.04^\circ & 230.08 \angle -40.24^\circ
 \end{pmatrix}
 \ \Omega
 \]
@@ -157,8 +157,8 @@ A partir de las mediciones vistas previamente se obtuvieron las matrices:
 \[
 \mathbf{Y}_{9602} =
 \begin{pmatrix}
-4.73 \angle 61.60^\circ & 10.72 \angle -1.37^\circ \\
-39.46 \angle -13.00^\circ & 6.68 \angle -58.78^\circ
+4.73 \angle 61.60^\circ & 10.72 \angle 180.00^\circ \\
+38.67 \angle 167.00^\circ & 6.68 \angle 58.78^\circ
 \end{pmatrix}
 \ \mathrm{mS}
 \]
@@ -166,12 +166,11 @@ A partir de las mediciones vistas previamente se obtuvieron las matrices:
 \[
 \mathbf{Y}_{9610} =
 \begin{pmatrix}
-3.78 \angle 6.32^\circ & 9.00 \angle -1.68^\circ \\
-4.08 \angle -27.00^\circ & 4.92 \angle -16.82^\circ
+3.78 \angle 6.32^\circ & 9.00 \angle 164.00^\circ \\
+4.00 \angle 153.00^\circ & 4.92 \angle 16.82^\circ
 \end{pmatrix}
 \ \mathrm{mS}
 \]
-
 
 \subsubsection{Calculadas}
 
@@ -181,7 +180,47 @@ A partir de las matrices $Z$ experimentales, las matrices de admitancias corresp
 \mathbf{Y}_{Z}=\mathbf{Z}^{-1}.
 \end{equation}
 
-Finalmente, la matriz $Y$ obtenida es:
+Finalmente, las matrices $Y$ obtenida es:
+
+\[
+\mathbf{Y}_{Z,9602} =
+\begin{pmatrix}
+4.97 \angle -2.71^\circ & 2.70 \angle 175.29^\circ \\
+3.06 \angle 170.03^\circ & 6.88 \angle 52.03^\circ
+\end{pmatrix}
+\ \mathrm{mS}
+\]
+
+\[
+\mathbf{Y}_{Z,9610} =
+\begin{pmatrix}
+3.94 \angle 7.09^\circ & 2.82 \angle 164.09^\circ \\
+3.15 \angle 175.30^\circ & 5.60 \angle 18.30^\circ
+\end{pmatrix}
+\ \mathrm{mS}
+\]
+\subsubsection{Análisis de comparación entre las matrices $Y$ experimentales y las calculadas}
+
+Al comparar las matrices $Y$ experimentales con las calculadas a partir de $Z$, se observan diferencias entre los valores obtenidos. Esto se debe a que las matrices experimentales se obtuvieron mediante mediciones directas, mientras que las calculadas dependen de la inversión de la matriz $Z$, por lo que arrastran y amplifican los errores de sus parámetros.
+
+Además, para medir los parámetros $Y$ fue necesario simular condiciones de cortocircuito usando resistencias de bajo valor. Por lo tanto, el cortocircuito no fue ideal y la tensión en el puerto correspondiente no fue exactamente nula.
+
+Las diferencias fueron más notorias en los parámetros no diagonales. Al analizar la Ecuación: \ref{ecuacion_inversa} podemos ver que estos valores dependen fuertemente de $Z_{21}$ y $Z_{12}$ por lo que si hubo un error de medición se explicaría la diferencia. 
+
+\begin{equation}
+    \mathbf{Y}=\mathbf{Z}^{-1}
+    =
+    \frac{1}{\det(\mathbf{Z})}
+    \begin{bmatrix}
+        Z_{22} & -Z_{12}\\
+        -Z_{21} & Z_{11}
+    \end{bmatrix}
+    \label{ecuacion_inversa}
+\end{equation}
+
+
+Por estas razones, aunque ambas matrices representan el mismo cuadrípolo, es esperable que no coincidan exactamente. Las diferencias son especialmente notorias en los parámetros no diagonales, ya que suelen ser más sensibles a errores de medición.
+
 
 \subsection{Matrices $T$}
 
@@ -204,19 +243,18 @@ A partir de las mediciones vistas previamente se obtuvieron las matrices:
 \[
 \mathbf{T}_{9602} =
 \begin{pmatrix}
-2.25 \angle 62.00^\circ & -25.34 \angle 13.00^\circ \ \Omega \\
-10.28 \angle 72.96^\circ \ \mathrm{mS} & -0.120 \angle 74.60^\circ
+2.25 \angle 62.00^\circ & 25.86 \angle 13.00^\circ \ \Omega \\
+10.28 \angle 72.96^\circ \ \mathrm{mS} & 0.122 \angle 74.60^\circ
 \end{pmatrix}
 \]
 
 \[
 \mathbf{T}_{9610} =
 \begin{pmatrix}
-16.62 \angle 23.00^\circ & -245.00 \angle 27.00^\circ \ \Omega \\
-50.83 \angle 52.04^\circ \ \mathrm{mS} & -0.926 \angle 33.32^\circ
+16.62 \angle 23.00^\circ & 250.00 \angle 27.00^\circ \ \Omega \\
+50.83 \angle 52.04^\circ \ \mathrm{mS} & 0.945 \angle 33.32^\circ
 \end{pmatrix}
 \]
-
 
 \subsubsection{Calculadas}
 
@@ -233,3 +271,31 @@ D=\frac{Z_{22}}{Z_{21}}.
 \end{equation}
 
 Obteniendo así las matrices:
+
+\[
+\mathbf{T}_{Z,9602} =
+\begin{pmatrix}
+2.25 \angle 62.00^\circ & 327.03 \angle 9.97^\circ \ \Omega \\
+10.28 \angle 72.96^\circ \ \mathrm{mS} & 1.62 \angle 7.26^\circ
+\end{pmatrix}
+\]
+
+\[
+\mathbf{T}_{Z,9610} =
+\begin{pmatrix}
+1.78 \angle 23.00^\circ & 317.37 \angle 4.70^\circ \ \Omega \\
+5.44 \angle 52.04^\circ \ \mathrm{mS} & 1.25 \angle 11.80^\circ
+\end{pmatrix}
+\]
+
+\subsubsection{Análisis de comparación entre las matrices $T$ experimentales y las calculadas}
+
+Al comparar las matrices $T$ experimentales con las calculadas a partir de la matriz $Z$, se observan discrepancias importantes. Esto puede ser por un posible error en el valor de $Z_{21}$ debido a que $T$ depende fuertemente de este parámetro, ya que todos los términos calculados involucran divisiones por este parámetro.
+
+Por otro lado, al imponer la condición de reciprocidad $Z_{12}=Z_{21}$, las diferencias entre las matrices $T$ experimentales y calculadas no se reducen significativamente. Por lo tanto, el error no parece deberse únicamente a una diferencia entre los parámetros de transferencia $Z_{12}$ y $Z_{21}$, sino a una inconsistencia más general entre las mediciones utilizadas para obtener la matriz $Z$ y las mediciones utilizadas para obtener la matriz $T$.
+
+Ademas,  si tenemos en cuenta el error anteriormente analizado en la comparación de la matriz $Y$ podemos inferir que puede haber un error de medición en los parametros $Z_{12}$ y $Z_{21}$.
+
+En particular, el parámetro $B$ es muy sensible al error, ya que depende del determinante de $\mathbf{Z}$. Por lo tanto, pequeñas variaciones en los módulos o fases de los parámetros de impedancia pueden producir diferencias grandes en la matriz $T$ calculada.
+
+También influyen las limitaciones experimentales, como el uso de resistencias para simular cortocircuitos, las impedancias de los instrumentos y posibles errores en la medición. Por eso, es razonable que las matrices $T$ experimentales y calculadas no coincidan exactamente, especialmente si alguno de los parámetros de la matriz $Z$ presenta un error significativo.
