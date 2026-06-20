@@ -1,0 +1,144 @@
+\section{Introducción}
+
+\subsection{Objetivos del Trabajo Práctico}
+El presente trabajo práctico tuvo como objetivos aprender a medir los distintos parámetros de un cuadripolo de forma experimental, comprobar las relaciones entre los distintos parámetros para un mismo cuadripolo y, por último, aplicar los conocimientos teóricos de cuadripolos aprendidos en clase para predecir el comportamiento de la conexión entre dos de ellos.
+
+\subsection{Circuito Analizado}
+El objeto de estudio consiste en dos dispositivos cerrados lineales e invariantes en el tiempo de dos puertos, cuyas topologías internas e interconexiones de componentes pasivos son inicialmente desconocidas. El comportamiento eléctrico de estas cajas negras de acceso externo queda caracterizado a partir del cuadripolo de referencia parametrizado por las tensiones y corrientes en sus terminales, adoptando la convención estándar de corrientes entrantes a la red en ambos puertos ($I_1$ e~$I_2$). 
+
+Los circuitos analizados poseen las siguientes restricciones de contorno para evitar la saturación o daño de los componentes:
+\begin{itemize}
+    \item \textbf{Tensión máxima de entrada:} $15\text{ V}$.
+    \item \textbf{Corriente máxima de entrada:} $50\text{ mA}$.
+\end{itemize}
+
+Para simular y aproximar el comportamiento interno de dichos dispositivos, se propone el empleo de dos modelos circuitales equivalentes con componentes pasivos de parámetros concentrados comerciales. El primer dispositivo se modela mediante una estructura tipo triángulo o $\Pi$ compuesta por tres resistencias ($R_A, R_B, R_C$) y un capacitor en paralelo ($C_B$), tal como se detalla en la Figura~\ref{fig:modelo_cuad1}. El segundo dispositivo se modela mediante una estructura tipo estrella o $T$ conformada por tres resistencias ($R_A, R_B, R_C$) y un capacitor en derivación ($C_C$), ilustrada en la Figura~\ref{fig:modelo_cuad2}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{circuitikz}
+        \draw (0,2) to[short, o-] (1,2)
+              (1,2) to[R, l=$R_C$] (4.5,2)
+              (1,2) to[R, l=$R_A$] (1,0)
+              (4.5,2) to[R, l=$R_B$] (4.5,0)
+              (4.5,2) -- (6,2) to[C, l=$C_B$] (6,0) -- (4.5,0);
+        \draw (6,2) to[short, -o] (7.5,2);
+        \draw (0,0) to[short, o-o] (7.5,0);
+    \end{circuitikz}
+    \vspace{0.2cm}
+    \caption{Modelo equivalente tipo $\Pi$ propuesto para el análisis del Cuadripolo 1.}
+    \label{fig:modelo_cuad1}
+    
+    \vspace{1cm}
+    
+    \begin{circuitikz}
+        \draw (0,2) to[short, o-] (1,2)
+              (1,2) to[R, l=$R_A$] (3,2)
+              (3,2) -- (4.5,2)
+              (4.5,2) to[R, l=$R_B$] (6.5,2)
+              (6.5,2) to[short, -o] (7.5,2);
+        \draw (3,2) to[R, l=$R_C$, *-*] (3,0);
+        \draw (4.5,2) to[C, l=$C_C$, *-*] (4.5,0);
+        \draw (0,0) to[short, o-o] (7.5,0);
+    \end{circuitikz}
+    \vspace{0.2cm}
+    \caption{Modelo equivalente tipo $T$ propuesto para el análisis del Cuadripolo 2.}
+    \label{fig:modelo_cuad2}
+\end{figure}
+
+Asimismo, el análisis práctico contempla el comportamiento del dispositivo operando en régimen permanente sinusoidal bajo una frecuencia de excitación de $1\text{ kHz}$ y su interacción dinámica ante la conexión de una impedancia de carga pasiva externa ($Z_C$) acoplada a sus terminales de salida, tal como se esquematiza en la Figura~\ref{fig:cuadripolo_cargado}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{circuitikz}[american voltages, american currents]
+        % Caja del cuadripolo
+        \draw (0,0) rectangle (4,2.2) node[pos=0.5] {\textbf{Cuadripolo}};
+        
+        % Puerto 1 (Entrada)
+        \draw (-2,2) to[short, o-, i=$I_1$] (0,2);
+        \draw (-2,0.2) to[short, o-] (0,0.2);
+        \draw (-2,2) to[open, v=$V_1$] (-2,0.2);
+        
+        % Puerto 2 (Salida)
+        \draw (6,2) to[short, o-, i=$I_2$] (4,2);
+        \draw (6,0.2) to[short, o-] (4,0.2);
+        \draw (6,2) to[open, v^=$V_2$] (6,0.2);
+        
+        % Conexión e Impedancia de Carga externa
+        \draw (6,2) -- (7.5,2) to[generic, l=$Z_C$] (7.5,0.2) -- (6,0.2);
+    \end{circuitikz}
+    \vspace{0.2cm}
+    \caption{Representación circuital del cuadripolo lineal operando con una impedancia de carga externa conectada a su puerto de salida.}
+    \label{fig:cuadripolo_cargado}
+\end{figure}
+
+\subsection{Marco Teórico}
+
+\subsubsection{Representación Matricial de Redes de Dos Puertos}
+Un cuadripolo lineal puede ser unívocamente definido en términos algebraicos mediante la selección de un par de variables independientes y un par de variables dependientes escogidas de entre el conjunto $\{V_1, V_2, I_1, I_2\}$. Las descripciones más usuales en cortocircuito y circuito abierto corresponden a los parámetros de impedancia ($\mathbf{Z}$) y admitancia ($\mathbf{Y}$), cuyas ecuaciones constitutivas en forma matricial se definen como:
+
+\begin{equation}
+    \begin{bmatrix} V_1 \\ V_2 \end{bmatrix} 
+    = 
+    \begin{bmatrix} Z_{11} & Z_{12} \\ Z_{21} & Z_{22} \end{bmatrix} 
+    \begin{bmatrix} I_1 \\ I_2 \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \begin{bmatrix} I_1 \\ I_2 \end{bmatrix} 
+    = 
+    \begin{bmatrix} Y_{11} & Y_{12} \\ Y_{21} & Y_{22} \end{bmatrix} 
+    \begin{bmatrix} V_1 \\ V_2 \end{bmatrix}
+\end{equation}
+
+Por otra parte, cuando se desea evaluar la transferencia de señales desde una fuente hacia una etapa subsecuente, o analizar la interconexión eslabonada de múltiples estructuras, resulta conveniente emplear los parámetros de transmisión o de cascada ($\mathbf{T}$). Esta representación vincula las variables del puerto de entrada directamente con las del puerto de salida:
+
+\begin{equation}
+    \begin{bmatrix} V_1 \\ I_1 \end{bmatrix} 
+    = 
+    \begin{bmatrix} A & B \\ C & D \end{bmatrix} 
+    \begin{bmatrix} V_2 \\ -I_2 \end{bmatrix}
+\end{equation}
+
+\subsubsection{Conversión Analítica de Parámetros}
+Dado que todas estas matrices describen algebraicamente el mismo circuito físico, existe una equivalencia analítica directa entre ellas. La teoría de conversión de parámetros permite transformar una matriz en otra mediante relaciones que dependen del determinante de la matriz de origen ($\Delta$). Específicamente, la transición de los parámetros $\mathbf{Z}$ hacia las representaciones $\mathbf{Y}$ y $\mathbf{T}$ se rige por las siguientes expresiones lineales extraídas de las tablas de conversión oficiales de la cátedra:
+
+\begin{equation}
+    \mathbf{Y} = \mathbf{Z}^{-1} = 
+    \begin{bmatrix} 
+    \frac{Z_{22}}{\Delta_Z} & \frac{-Z_{12}}{\Delta_Z} \\[0.6em] 
+    \frac{-Z_{21}}{\Delta_Z} & \frac{Z_{11}}{\Delta_Z} 
+    \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \mathbf{T} = 
+    \begin{bmatrix} 
+    \frac{Z_{11}}{Z_{21}} & \frac{\Delta_Z}{Z_{21}} \\[0.6em] 
+    \frac{1}{Z_{21}} & \frac{Z_{22}}{Z_{21}} 
+    \end{bmatrix}
+\end{equation}
+donde el determinante queda definido como $\Delta_Z = Z_{11}Z_{22} - Z_{12}Z_{21}$.
+
+\subsubsection{Interconexión de Redes y Condición de Brune}
+Al acoplar dos cuadripolos en serie, sus matrices $\mathbf{Z}$ individuales se suman; en una configuración en paralelo, se adicionan sus matrices $\mathbf{Y}$; y al disponerlos en cascada, el comportamiento equivalente se modela mediante el producto de sus matrices $\mathbf{T}$.
+
+No obstante, para las conexiones serie y paralelo, es imperativo comprobar la \textit{condición de Brune}. Esta verificación matemática y física asegura que la interconexión de las terminales de ambos bloques no dé lugar a diferencias de potencial que fuercen la circulación de corrientes parásitas por la malla de unión. Al anularse idealmente dichas tensiones en la fase de prueba en cortocircuito antes de la conexión física, se evita alterar la condición intrínseca de ``puerto'' (donde la corriente entrante por un terminal debe ser idéntica a la saliente por su par), garantizando así la validez de la superposición matricial directa.
+
+\subsubsection{Modelado Interno Equivalente y Análisis en Banda Ancha}
+Estas representaciones permiten sintetizar modelos de circuitos equivalentes pasivos convencionales (como redes en estrella/$T$ o triángulo/$\Pi$ conformadas por combinaciones de resistencias y capacitores comerciales) para aproximar el comportamiento de un dispositivo del cual se desconoce su topología interna original. 
+
+Dado que dichos componentes ideales aproximan físicamente a las constantes matriciales a una frecuencia fija ($1\text{ kHz}$), resulta necesario evaluar un parámetro en función de la frecuencia en un espectro más amplio (de $100\text{ Hz}$ a $10\text{ kHz}$). Esto permite dictaminar los rangos de validez y las limitaciones de banda ancha del modelo equivalente adoptado frente a las no idealidades y efectos reactivos parásitos del dispositivo real.
+
+\subsubsection{Funciones de Red en Cuadripolos Cargados}
+Para describir cuantitativamente el rendimiento de un cuadripolo que interactúa operativamente con una impedancia de carga externa ($Z_C$), se recurre a las denominadas \textit{funciones de red}. Estas expresiones parametrizan propiedades dinámicas esenciales como la impedancia de entrada ($Z_{in}$) y la transferencia de tensión ($A_v$). A partir del modelo matricial $\mathbf{Z}$ del dispositivo, estas funciones se deducen analíticamente mediante las siguientes ecuaciones estándar:
+
+\begin{equation}
+    Z_{in} = \frac{\Delta_Z + Z_{11} \cdot Z_C}{Z_{22} + Z_C}
+\end{equation}
+
+\begin{equation}
+    A_v = \frac{V_2}{V_1} = \frac{Z_{21} \cdot Z_C}{\Delta_Z + Z_{11} \cdot Z_C}
+\end{equation}
+
+\end{document}
