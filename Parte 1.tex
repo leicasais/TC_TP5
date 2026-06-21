@@ -124,6 +124,7 @@ Por último, se buscó generar un cortocircuito en el puerto 1, como se puede ve
 \label{fig:conf_4}
 \end{figure}
 
+
 Finalmente, una vez caracterizados ambos cuadripolos de manera individual,
 se implementaron dos configuraciones adicionales para estudiar el comportamiento
 de la conexión entre redes de dos puertos. En primer lugar, se conectaron
@@ -188,6 +189,7 @@ de Brune.
 \end{figure}
 
 
+
 \subsection{Matrices $Z$ experimentales}
 
 Los valores obtenidos para las matrices de impedancias se expresan en $\Omega$.
@@ -203,12 +205,14 @@ Los valores obtenidos para las matrices de impedancias se expresan en $\Omega$.
 
 \[
 \mathbf{Z}_{9610} =
-\begin{pmatrix}
-326.96 \angle -29.04^\circ & 164.85 \angle -63.24^\circ \\
-183.97 \angle -52.04^\circ & 230.08 \angle -40.24^\circ
-\end{pmatrix}
-\ \Omega
-\]
+    \begin{pmatrix}
+    326.96 \angle -29.04^\circ & 164.85 \angle -63.24^\circ \\
+    183.97 \angle -52.04^\circ & 230.08 \angle -40.24^\circ
+    \end{pmatrix}
+    \ \Omega
+  \label{mat_Z_9610}  
+  \]
+    
 
 \subsection{Matrices $Y$}
 
@@ -253,6 +257,7 @@ Finalmente, las matrices $Y$ obtenida es:
 3.06 \angle 170.03^\circ & 6.88 \angle 52.03^\circ
 \end{pmatrix}
 \ \mathrm{mS}
+\label{mat:Y_9602}
 \]
 
 \[
@@ -322,17 +327,7 @@ A partir de las mediciones vistas previamente se obtuvieron las matrices:
 
 \subsubsection{Calculadas}
 
-Del mismo modo, utilizando la convención adoptada para los parámetros de transmisión, se utilizaron las siguientes ecuaciones para obtener la matriz $T$ a partir de la matriz $Z$:
-
-\begin{equation}
-A=\frac{Z_{11}}{Z_{21}},
-\qquad
-B=\frac{\det(\mathbf{Z})}{Z_{21}},
-\qquad
-C=\frac{1}{Z_{21}},
-\qquad
-D=\frac{Z_{22}}{Z_{21}}.
-\end{equation}
+Del mismo modo, utilizando la convención adoptada para los parámetros de transmisión, se utilizó la ecuacion \ref{eq:Z_a_T} para obtener la matriz $T$ a partir de la matriz $Z$:
 
 Obteniendo así las matrices:
 
@@ -363,5 +358,3 @@ Ademas,  si tenemos en cuenta el error anteriormente analizado en la comparació
 En particular, el parámetro $B$ es muy sensible al error, ya que depende del determinante de $\mathbf{Z}$. Por lo tanto, pequeñas variaciones en los módulos o fases de los parámetros de impedancia pueden producir diferencias grandes en la matriz $T$ calculada.
 
 También influyen las limitaciones experimentales, como el uso de resistencias para simular cortocircuitos, las impedancias de los instrumentos y posibles errores en la medición. Por eso, es razonable que las matrices $T$ experimentales y calculadas no coincidan exactamente, especialmente si alguno de los parámetros de la matriz $Z$ presenta un error significativo.
-
-\newpage

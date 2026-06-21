@@ -26,7 +26,7 @@ Para simular y aproximar el comportamiento interno de dichos dispositivos, se pr
         \draw (0,0) to[short, o-o] (7.5,0);
     \end{circuitikz}
     \vspace{0.2cm}
-    \caption{Modelo equivalente tipo $\Pi$ propuesto para el análisis del Cuadripolo 1.}
+    \caption{Modelo equivalente tipo $\Pi$ propuesto para el análisis de los Cuadripolos.}
     \label{fig:modelo_cuad1}
     
     \vspace{1cm}
@@ -42,7 +42,7 @@ Para simular y aproximar el comportamiento interno de dichos dispositivos, se pr
         \draw (0,0) to[short, o-o] (7.5,0);
     \end{circuitikz}
     \vspace{0.2cm}
-    \caption{Modelo equivalente tipo $T$ propuesto para el análisis del Cuadripolo 2.}
+    \caption{Modelo equivalente tipo $T$ propuesto para el análisis de los Cuadripolos.}
     \label{fig:modelo_cuad2}
 \end{figure}
 
@@ -117,6 +117,7 @@ Dado que todas estas matrices describen algebraicamente el mismo circuito físic
     \frac{Z_{11}}{Z_{21}} & \frac{\Delta_Z}{Z_{21}} \\[0.6em] 
     \frac{1}{Z_{21}} & \frac{Z_{22}}{Z_{21}} 
     \end{bmatrix}
+    \label{eq:Z_a_T}
 \end{equation}
 donde el determinante queda definido como $\Delta_Z = Z_{11}Z_{22} - Z_{12}Z_{21}$.
 
@@ -125,20 +126,29 @@ Al acoplar dos cuadripolos en serie, sus matrices $\mathbf{Z}$ individuales se s
 
 No obstante, para las conexiones serie y paralelo, es imperativo comprobar la \textit{condición de Brune}. Esta verificación matemática y física asegura que la interconexión de las terminales de ambos bloques no dé lugar a diferencias de potencial que fuercen la circulación de corrientes parásitas por la malla de unión. Al anularse idealmente dichas tensiones en la fase de prueba en cortocircuito antes de la conexión física, se evita alterar la condición intrínseca de ``puerto'' (donde la corriente entrante por un terminal debe ser idéntica a la saliente por su par), garantizando así la validez de la superposición matricial directa.
 
-\subsubsection{Modelado Interno Equivalente y Análisis en Banda Ancha}
-Estas representaciones permiten sintetizar modelos de circuitos equivalentes pasivos convencionales (como redes en estrella/$T$ o triángulo/$\Pi$ conformadas por combinaciones de resistencias y capacitores comerciales) para aproximar el comportamiento de un dispositivo del cual se desconoce su topología interna original. 
 
-Dado que dichos componentes ideales aproximan físicamente a las constantes matriciales a una frecuencia fija ($1\text{ kHz}$), resulta necesario evaluar un parámetro en función de la frecuencia en un espectro más amplio (de $100\text{ Hz}$ a $10\text{ kHz}$). Esto permite dictaminar los rangos de validez y las limitaciones de banda ancha del modelo equivalente adoptado frente a las no idealidades y efectos reactivos parásitos del dispositivo real.
+\subsection{Ecuaciones de las redes pasivas}
 
-\subsubsection{Funciones de Red en Cuadripolos Cargados}
-Para describir cuantitativamente el rendimiento de un cuadripolo que interactúa operativamente con una impedancia de carga externa ($Z_C$), se recurre a las denominadas \textit{funciones de red}. Estas expresiones parametrizan propiedades dinámicas esenciales como la impedancia de entrada ($Z_{in}$) y la transferencia de tensión ($A_v$). A partir del modelo matricial $\mathbf{Z}$ del dispositivo, estas funciones se deducen analíticamente mediante las siguientes ecuaciones estándar:
-
+Las redes pasivas $\Pi$ son las que se representan con un modelo similar al de la figura \ref{fig:modelo_cuad1} pero de manera más general con impedancias. Es decir, no es necesario que $Z_A = R_A$, esta puede ser una impedancia genérica como el resto. Las escuaciones que rigen a este cuadripolo son las siguientes:
 \begin{equation}
-    Z_{in} = \frac{\Delta_Z + Z_{11} \cdot Z_C}{Z_{22} + Z_C}
+\begin{aligned}
+    Z_A &= Z_{11} - Z_{12},\\
+    Z_B &= Z_{22} - Z_{21},\\
+    Z_C &= Z_{12} = Z_{21}.
+\end{aligned}
+\label{eq:Z_T}
 \end{equation}
 
+De manera similar, se deduden las ecuaciones para las redes pasivas T. Estas redes tienen una estructura similar a la figura \ref{fig:modelo_cuad2} pero con la misma salvedad realizada para la red pasiva anterior. Las ecuaciones que rigen a este cuadripolo son las siguientes:
 \begin{equation}
-    A_v = \frac{V_2}{V_1} = \frac{Z_{21} \cdot Z_C}{\Delta_Z + Z_{11} \cdot Z_C}
+    \begin{aligned}
+    Y_B = Y_{11} + Y_{12}, \\
+    Y_C = Y_{22} + Y_{21}, \\
+    Y_A = -Y_{12} = -Y_{21}.
+    \end{aligned}
+    \label{eq:Y_pi}
 \end{equation}
+
+
 
 \newpage
