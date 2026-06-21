@@ -1,0 +1,66 @@
+\subsection{Búsqueda de los componentes}
+Se intenta hallar los componentes de ambos cuadripolos correspondientes a alguna de las dos siguientes figuras \ref{fig:modelo_cuad1} y \ref{fig:modelo_cuad2}
+
+Se han usado las siguientes fórmulas que corresponden a cada red.
+Para la red T las ecuaciones expresadas en \ref{eq:Z_T}
+Siendo en este caso $Z_C$ el paralelo entre la impedancia de $R_C$ y $C_C$.
+
+Para la red $\Pi$ las ecuaciones expresadas en \ref{eq:Y_pi}
+En este caso $Y_C = {Z_C}^{-1}$
+
+Como primera observación, para el modelo del cuadripolo $\Pi$ se espera que el único componente cuya admitancia tenga una fase distinta de cero sea el $Y_C$. Es más, de ella se espera que tenga una fase positiva. De manera recíproca, se espera para el modelo del cuadripolo T que el único componente que cuya impedancia tenga una fase distinta de cero es el $Z_C$. De este último, se espera que tenga una fase negativa. 
+Entonces se empezó probando estas dos condiciones y dio como resultado que el cuadripolo que se puede modelar como una red T es el cuadripolo 9610 (Figura \ref{fig:modelo_cuad2})y el 9602 puede ser modelado como una red $\Pi$(Figura \ref{fig:modelo_cuad1}). 
+Obteniendose así los siguientes resultados:
+\subsubsection{Cuadripolo 9610}
+Se  usaron las ecuaciones \ref{eq:Z_T} y se tuvo en cuenta la matriz \ref{mat_Z_9610}. Un pequeño detalle es que la matriz experimental no resulta recíproca, cosa que es incompatible con el modelo estudiadi, por lo tanto para hacer las cuentas se ha tomado un promedio como $Z_{21_T} = Z_{12_T} = \frac{Z_{21_{9610}} + Z_{21_{9610}}} {2}$. Entonces se ha tomado $Z_{21} = Z_{12} \sim 173,57 \angle{-57,3} ^\circ \Omega$
+
+Dando como resultado:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Componente & Valor calculado & Valor Nominal \\
+        \hline
+        $R_A$ & 192.54 & 180 \\
+        $R_B$ & 82.44 & 62 \\
+        $R_C$ & 321.34 & 330 \\
+        $C_C$ & 772nF & 1$\mu$ F\\
+        \hline
+    \end{tabular}
+    \caption{Componentes del Cuadripolo 9610}
+    \label{tab:comp_9610}
+\end{table}
+
+Se simularon los parámetros cálculados en el cuadro \ref{tab:comp_9610} obteniendose como resultado los siguientes parámetros: 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Parámetro & Experimental & Simulado \\
+        \hline
+        $Z_{11}$ & $326.96 \angle -29.04^\circ$ & $316.22 \angle -28^\circ$ \\
+        $Z_{22}$ &  $230.08 \angle -40.24^\circ$ &  $237.13 \angle -40^\circ$ \\
+        $Z_{12}$ & $164.85 \angle -63.24^\circ$ & $177.82 \angle -57.57^\circ$ \\
+        $Z_{21}$ & $183.97 \angle -52.04^\circ$ & $177.82 \angle -57.57^\circ$\\
+        \hline
+    \end{tabular}
+    \caption{Parámetros simulados y experimentales del Cuadripolo 9610}
+    \label{tab:comp_9610}
+\end{table}
+En estos resultados se observa un mayor error en los parámetros $Z_{12}$ y $Z_{21}$ cosa que es natural pues se ha tomado un promedio de ambos parámetros reales para obtener la aproximación al modelo propuesto. En los demas parámetros también está presente un cierto error pero que resulta pequeño y puede estar ligado a la cuestion mencionada anteriormente. 
+
+\subsubsection{Cuadripolo 9602}
+Se ha intentado modelar este cuadripolo con una red $\Pi$ como indica la figura \ref{fig:modelo_cuad1}, las euaciones \ref{eq:Y_pi} además de la matriz experimental \ref{mat:Y_9602}. Para este caso también se evidencia una matriz que no es recíproca. Para este cuadripolo, la admitancia de las diagonales debería tener una fase nula por lo tanto se toma en cuenta el valor de admitancia más coherente para este caso que sería $Y_{12_{\Pi}} = Y_{12_{\Pi}} = Y_{12_{9602}} = 10.72 \angle 180.00^\circ mS$. Resulta coherente este resultado pues dicha admitancia es la opuesta a la admitancia de una resistencia física($Y_A = \frac{1}{R_A}$). Por lo tanto, es coherente que sea una admitancia negativa. 
+No obstante, aparece un problema grave cuando se quiere calcular el resto de impedancias. EN el cálculo de $Y_B$ e $Y_C$ se encuentra que las mismas son resistencias negativas. Esta conclusión resulta incompatible con el modelo físico con el que se está trabajando. Esto podría pasar si se trabajara con fuentes controladas. Por lo tanto, se puede concluir que hay una error en la medición de la matriz $Y_{9602}$. 
+
+
+
+
+
+
+
+
+
+
