@@ -124,6 +124,70 @@ Por último, se buscó generar un cortocircuito en el puerto 1, como se puede ve
 \label{fig:conf_4}
 \end{figure}
 
+Finalmente, una vez caracterizados ambos cuadripolos de manera individual,
+se implementaron dos configuraciones adicionales para estudiar el comportamiento
+de la conexión entre redes de dos puertos. En primer lugar, se conectaron
+los cuadripolos en cascada, uniendo el puerto de salida del primer bloque con
+el puerto de entrada del segundo, tambien sabiendo que resulta conveniente
+emplear los parámetros de transmisión $T$. En segundo lugar, se realizó una
+conexión serie entre ambos cuadripolos, para la cual se utilizaron los parámetros
+de impedancia $Z$, debido a que la matriz equivalente se obtiene como la suma
+de las matrices individuales, siempre que se verifique previamente la condición
+de Brune.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1, transform shape]
+    	% Paths, nodes and wires:
+    	\node[shape=rectangle, draw, line width=1pt, minimum width=1.965cm, minimum height=2.465cm](N1) at (1.326, 5.724){} node[anchor=center] at (N1.text){$C 9602$};
+    	\draw (2.326, 4.974) to[short] (5, 5);
+    	\draw[-latex] (-0.199, 5.172) -- (-0.199, 6.244);
+    	\draw[-latex] (8.433, 5.253) -- (8.433, 6.324);
+    	\node[shape=rectangle, minimum width=0.489cm, minimum height=0.794cm](N2) at (0.063, 5.829){} node[anchor=center] at (N2.text){$V_1$} node[anchor=north west, align=left, text width=0.101cm, inner sep=6pt] at (-0.199, 6.244){};
+    	\node[shape=rectangle, minimum width=0.448cm, minimum height=0.28cm](N3) at (8.17, 5.949){} node[anchor=center] at (N3.text){$V_2$} node[anchor=north west, align=left, text width=0.06cm, inner sep=6pt] at (7.928, 6.106){};
+    	\draw (2.326, 6.974) to[open] (2.326, 6.039);
+    	\draw (2.326, 6.974) to[open] (2.326, 6.039);
+    	\draw (2.326, 6.039) to[open] (2.315, 6.511);
+    	\draw (2.315, 6.511) to[short] (4.989, 6.537);
+    	\node[shape=rectangle, draw, line width=1pt, minimum width=1.965cm, minimum height=2.465cm](N4) at (6.928, 5.791){} node[anchor=center] at (N4.text){$C9610$};
+    	\draw (2.315, 6.511) to[open] (2.326, 4.974);
+    	\draw (2.583, 6.492) to[open] (2.593, 6.505);
+    	\draw (2.005, 7.671) to[open] (2.588, 4.968);
+    	\draw (4.989, 6.537) -| (5.934, 6.534) |- (5, 5) -| (5.912, 4.998) |- (5.956, 5.032);
+    	\draw (7.901, 6.589) -- (9.989, 6.589);
+    	\draw (7.889, 4.987) -| (10, 5);
+    	\draw (0.356, 4.97) |- (-2.24, 4.985);
+    	\draw (0.339, 6.575) -| (-2.321, 6.567);
+   \end{tikzpicture}
+   \caption{Esquemático conexion en cascada}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[transform shape]
+    	% Paths, nodes and wires:
+    	\node[shape=rectangle, draw, line width=1pt, minimum width=1.965cm, minimum height=2.465cm](N1) at (1.326, 5.724){} node[anchor=center] at (N1.text){$C 9602$};
+    	\draw[-latex] (-2.071, 1.626) -| (-2.041, 6.158);
+    	\draw[-latex] (4.28, 1.577) -| (4.328, 6.136);
+    	\node[shape=rectangle, minimum width=0.489cm, minimum height=0.794cm](N2) at (-1.565, 3.84){} node[anchor=center] at (N2.text){$V_1$} node[anchor=north west, align=left, text width=0.101cm, inner sep=6pt] at (-1.827, 4.254){};
+    	\node[shape=rectangle, minimum width=0.448cm, minimum height=0.28cm](N3) at (3.759, 4.197){} node[anchor=center] at (N3.text){$V_2$} node[anchor=north west, align=left, text width=0.06cm, inner sep=6pt] at (3.517, 4.355){};
+    	\draw (2.326, 6.974) to[open] (2.326, 6.039);
+    	\draw (2.326, 6.974) to[open] (2.326, 6.039);
+    	\draw (2.326, 6.039) to[open] (2.315, 6.511);
+    	\node[shape=rectangle, draw, line width=1pt, minimum width=1.965cm, minimum height=2.465cm](N4) at (1.33, 2.15){} node[anchor=center] at (N4.text){$C9610$};
+    	\draw (2.315, 6.511) to[open] (2.326, 4.974);
+    	\draw (2.583, 6.492) to[open] (2.593, 6.505);
+    	\draw (2.005, 7.671) to[open] (2.588, 4.968);
+    	\draw (0.35, 6.452) -| (-2.996, 6.487);
+    	\draw (2.315, 6.511) -| (5.342, 6.547);
+    	\draw (0.351, 5.026) |- (0, 5) |- (-0.014, 2.885) -| (0.343, 2.91);
+    	\draw (2.326, 4.974) -| (2.588, 4.968) |- (2.304, 2.888);
+    	\draw (0.341, 1.441) -| (-2.828, 1.436);
+    	\draw (2.326, 1.403) -| (4.961, 1.383);
+    \end{tikzpicture}
+    \caption{Esquemático de conexión en serie}
+\end{figure}
+
+
 \subsection{Matrices $Z$ experimentales}
 
 Los valores obtenidos para las matrices de impedancias se expresan en $\Omega$.
@@ -299,3 +363,5 @@ Ademas,  si tenemos en cuenta el error anteriormente analizado en la comparació
 En particular, el parámetro $B$ es muy sensible al error, ya que depende del determinante de $\mathbf{Z}$. Por lo tanto, pequeñas variaciones en los módulos o fases de los parámetros de impedancia pueden producir diferencias grandes en la matriz $T$ calculada.
 
 También influyen las limitaciones experimentales, como el uso de resistencias para simular cortocircuitos, las impedancias de los instrumentos y posibles errores en la medición. Por eso, es razonable que las matrices $T$ experimentales y calculadas no coincidan exactamente, especialmente si alguno de los parámetros de la matriz $Z$ presenta un error significativo.
+
+\newpage

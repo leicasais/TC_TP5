@@ -1,0 +1,108 @@
+\section{Conexión entre cuadripolos}
+\subsection{Conexión en cascada}
+
+Para analizar la conexión en cascada entre los cuadripolos 9602 y 9610,
+resulta conveniente trabajar con los parámetros de transmisión, ya que la
+matriz equivalente se obtiene mediante el producto matricial de las matrices
+individuales:
+
+\[
+T_{eq}=T_{9602}T_{9610}
+\]
+
+A partir de la medición directa de la conexión en cascada, y respetando la
+convención adoptada para la matriz de transmisión,
+
+\[
+T=
+\begin{pmatrix}
+A & B\\
+C & D
+\end{pmatrix},
+\]
+
+se obtuvo la siguiente matriz equivalente experimental:
+
+\[
+T_{eq,\mathrm{exp}} =
+\begin{bmatrix}6,0\angle 81,0^\circ\, & 27,36\angle 87,09^\circ\,\mathrm{mS} \\ 541,18\angle 55,0^\circ\,\Omega & 2,40\angle 61,12^\circ\,\end{bmatrix}
+\]
+
+Por otro lado, utilizando las matrices de transmisión calculadas a partir de
+las matrices de impedancia de cada cuadripolo, se obtuvo:
+
+\[
+T_{eq,calc}=T_{Z,9602}T_{Z,9610}
+\]
+
+\[
+T_{eq,calc}=
+\begin{pmatrix}
+34,92\angle83,91^\circ
+&
+104,80\angle114,74^\circ \ \mathrm{mS}
+\\[2mm]
+418,29\angle212,26^\circ \ \Omega
+&
+1,23\angle241,46^\circ
+\end{pmatrix}
+\]
+
+
+Al comparar ambas matrices se observan diferencias importantes entre la
+medición experimental y el cálculo teórico, en los parámetros \(A\) y \(C\) las fases tienen cierta cercanía, pero los módulos presentan diferencias apreciables. En cambio, en los parámetros
+ubicados en la segunda fila aparecen discrepancias mucho más grandes, especialmente en la fase, con diferencias cercanas a \(180^\circ\).
+
+Estas diferencias pueden deberse a errores acumulados durante la medición,
+ya que la conexión en cascada se obtiene mediante el producto de matrices
+complejas. Por lo tanto, pequeños errores de módulo o fase en las matrices
+individuales pueden amplificarse en la matriz equivalente. Además, los
+parámetros \(T\) dependen fuertemente de la convención de signos de la
+corriente \(I_2\), por lo que una inversión de referencia o una medición de fase
+incorrecta puede generar diferencias importantes. También influyen la
+resistencia interna de la fuente, las impedancias de los instrumentos y las
+conexiones entre cuadripolos.
+
+\subsection{Conexión serie}
+
+Para analizar la conexión serie entre ambos cuadripolos se utilizaron los
+parámetros de impedancia \(Z\), ya que en esta configuración la matriz
+equivalente se obtiene como la suma de las matrices individuales:
+
+\[
+Z_{eq,calc}=Z_{9602}+Z_{9610}
+\]
+
+A partir de las matrices medidas individualmente se obtuvo:
+
+\[
+Z_{eq,calc}=
+\begin{pmatrix}
+539,27\angle -21,78^\circ & 250,66\angle -64,77^\circ\\
+115,82\angle -69,48^\circ & 378,84\angle -50,57^\circ
+\end{pmatrix}
+\ \Omega
+\]
+
+Por otro lado, la matriz obtenida experimentalmente para la conexión serie fue:
+
+\[
+Z_{eq,exp}=
+\begin{pmatrix}
+546,82\angle -21,80^\circ & 238,72\angle -64,87^\circ\\
+113,17\angle -69,51^\circ & 368,16\angle -50,69^\circ
+\end{pmatrix}
+\ \Omega
+\]
+
+Al comparar ambas matrices, se observa una buena concordancia entre los
+valores calculados y los valores medidos. Las diferencias en módulo son bajas:
+aproximadamente \(1,4\%\) para \(Z_{11}\), \(4,8\%\) para \(Z_{12}\),
+\(2,3\%\) para \(Z_{21}\) y \(2,8\%\) para \(Z_{22}\). Además, las diferencias
+de fase son muy pequeñas, menores a \(0,2^\circ\) en todos los casos.
+
+Por lo tanto, la conexión serie queda correctamente representada mediante la
+suma de las matrices \(Z\) individuales. Las pequeñas discrepancias observadas
+pueden atribuirse a errores similares mencionados en el caso anterior.
+
+

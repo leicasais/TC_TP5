@@ -26,7 +26,7 @@ Para simular y aproximar el comportamiento interno de dichos dispositivos, se pr
         \draw (0,0) to[short, o-o] (7.5,0);
     \end{circuitikz}
     \vspace{0.2cm}
-    \caption{Modelo equivalente tipo $\Pi$ propuesto para el análisis de los Cuadripolos.}
+    \caption{Modelo equivalente tipo $\Pi$ propuesto para el análisis del Cuadripolo 1.}
     \label{fig:modelo_cuad1}
     
     \vspace{1cm}
@@ -42,7 +42,7 @@ Para simular y aproximar el comportamiento interno de dichos dispositivos, se pr
         \draw (0,0) to[short, o-o] (7.5,0);
     \end{circuitikz}
     \vspace{0.2cm}
-    \caption{Modelo equivalente tipo $T$ propuesto para el análisis de los Cuadripolos.}
+    \caption{Modelo equivalente tipo $T$ propuesto para el análisis del Cuadripolo 2.}
     \label{fig:modelo_cuad2}
 \end{figure}
 
@@ -140,29 +140,5 @@ Para describir cuantitativamente el rendimiento de un cuadripolo que interactúa
 \begin{equation}
     A_v = \frac{V_2}{V_1} = \frac{Z_{21} \cdot Z_C}{\Delta_Z + Z_{11} \cdot Z_C}
 \end{equation}
-
-\subsection{Ecuaciones de las redes pasivas}
-
-Las redes pasivas $\Pi$ son las que se representan con un modelo similar al de la figura \ref{fig:modelo_cuad1} pero de manera más general con impedancias. Es decir, no es necesario que $Z_A = R_A$, esta puede ser una impedancia genérica como el resto. Las escuaciones que rigen a este cuadripolo son las siguientes:
-\begin{equation}
-\begin{aligned}
-    Z_A &= Z_{11} - Z_{12},\\
-    Z_B &= Z_{22} - Z_{21},\\
-    Z_C &= Z_{12} = Z_{21}.
-\end{aligned}
-\label{eq:Z_T}
-\end{equation}
-
-De manera similar, se deduden las ecuaciones para las redes pasivas T. Estas redes tienen una estructura similar a la figura \ref{fig:modelo_cuad2} pero con la misma salvedad realizada para la red pasiva anterior. Las ecuaciones que rigen a este cuadripolo son las siguientes:
-\begin{equation}
-    \begin{aligned}
-    Y_B = Y_{11} + Y_{12}, \\
-    Y_C = Y_{22} + Y_{21}, \\
-    Y_A = -Y_{12} = -Y_{21}.
-    \end{aligned}
-    \label{eq:Y_pi}
-\end{equation}
-
-
 
 \newpage
